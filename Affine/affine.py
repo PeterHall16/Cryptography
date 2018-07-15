@@ -12,9 +12,6 @@ def program():
 	encrypted = []
 	decrypted = []
 
-	# Select encryption or decryption
-	toggle = str(input("Encrypt(1) or decrypt(2)?"))
-
 	# Get phrase to encrypt/decrpyt, equation
 	phrase = list(str(input("Input phrase: ")).upper())
 	print('Enter "a" and "b" values in the form (ax + b). "a" must be coprime with 26 (alphabet length)')
@@ -32,7 +29,7 @@ def program():
 			n = 0
 			break
 
-	print("Numeric phrase:  ")
+	print("Numeric phrase: ")
 	print(numericPhrase)
 
 	# Create key
@@ -42,6 +39,9 @@ def program():
 
 	print("Key:")
 	print(key)
+
+	# Select encryption or decryption
+	toggle = str(input("Encrypt(1) or decrypt(2)?"))
 
 	def encrypt():
 		counter = 0
@@ -92,5 +92,6 @@ def program():
 		decrypt()
 	else:
 		print("Please enter a valid response.")
+		program()
 
 program()
