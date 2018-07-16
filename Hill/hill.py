@@ -66,7 +66,7 @@ def encrypt():
 
 		if (len(a) < keyDimension):
 			while (len(a) < keyDimension):
-				a.append(len(alphabet))
+				a.append(25)
 
 		# Convert phrase to matrix
 		phraseArray = np.reshape(a, (keyDimension, 1))
@@ -104,7 +104,7 @@ def encrypt():
 
 	print(total)
 
-	while (counter < len(phrase)):
+	while (counter < len(total)):
 		finalLetters.append(alphabet[total[counter]])
 		counter = counter + 1
 
