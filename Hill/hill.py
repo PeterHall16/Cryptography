@@ -21,8 +21,7 @@ def encrypt():
 	phrase =  list(phrase)
 	print(phrase)
 
-	# Get key dimensions   --   ************** UPDATE PRIINT MESSAGE WHEN FIXED ***************
-	print(Back.YELLOW + Style.BRIGHT +"As of 7/16/2018 (M/D/Y), key dimension must be a factor or the phrase length. Will fix soon.")
+	# print(Back.YELLOW + Style.BRIGHT +"As of 7/16/2018 (M/D/Y), key dimension must be a factor or the phrase length. Will fix soon.")
 	keyDimension = int(input("Enter key dimension (Only one value as key is a square matrix): "))
 
 	# Generate random key
@@ -65,6 +64,10 @@ def encrypt():
 		print(a)
 		counter = counter + 1
 
+		if (len(a) < keyDimension):
+			while (len(a) < keyDimension):
+				a.append(len(alphabet))
+
 		# Convert phrase to matrix
 		phraseArray = np.reshape(a, (keyDimension, 1))
 		phraseMatrix = np.matrix(phraseArray)
@@ -100,8 +103,6 @@ def encrypt():
 		total += i
 
 	print(total)
-
-
 
 	while (counter < len(phrase)):
 		finalLetters.append(alphabet[total[counter]])
