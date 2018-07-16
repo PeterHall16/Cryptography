@@ -45,8 +45,8 @@ def encrypt():
 			counter = 0
 			break
 
-	print(Fore.GREEN + Style.BRIGHT + "Numeric Phrase:")
-	print(numericPhrase)
+	# print(Fore.GREEN + Style.BRIGHT + "Numeric Phrase:")
+	# print(numericPhrase)
 
 	# Split phrase
 	def chunk(it, size):
@@ -90,7 +90,6 @@ def encrypt():
 		print(merged)
 
 		appendedList.append(merged)
-
 
 	print(Fore.GREEN + Style.BRIGHT + "------------------------------")
 
