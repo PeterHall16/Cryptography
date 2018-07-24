@@ -33,7 +33,6 @@ def encrypt():
 	if (toggleKey == "1"):
 		# User inputed key
 		keyValues = list(str(input("Enter keyword phrase.")).upper())
-		print(keyValues)
 
 		while (counter < len(keyValues)):
 			n = alphabet.index(keyValues[counter])
@@ -48,23 +47,21 @@ def encrypt():
 		matrixBase = np.reshape(key, (keyDimension, keyDimension))
 		key = np.matrix(matrixBase)
 
-		print("Key: ")
-		print(key)
 	if (toggleKey == "2"):
 		# Generate random key
 		while (check == 0):
 			randomMatrix = np.random.randint(low = 0, high = 25, size = (keyDimension,keyDimension))
 			key = np.matrix(randomMatrix)
-			print(Fore.GREEN + Style.BRIGHT + "Randomly generated key:")
-			print(key)
 
 			# Check if determinant is nonzero 
 			# Range set at +/- 1 because sometimes determinant will be a very small number even though it should be 0.
 			if (np.linalg.det(key) > 1 or np.linalg.det(key) < -1):
 				check = 1
 				break
-				
+
 		# Fix if invalid response entered
+		print(Fore.GREEN + Style.BRIGHT + "key:")
+		print(key)
 
 	determinant = np.linalg.det(key).round()
 	print("Determinant:")
@@ -81,9 +78,6 @@ def encrypt():
 		if (len(numericPhrase) ==  len(phrase)):
 			counter = 0
 			break
-
-	# print(Fore.GREEN + Style.BRIGHT + "Numeric Phrase:")
-	# print(numericPhrase)
 
 	# Split phrase
 	def chunk(it, size):
@@ -107,8 +101,6 @@ def encrypt():
 
 		# Convert phrase to matrix
 		phraseArray = np.reshape(a, (keyDimension, 1))
-		print("AAAAAA:")
-		print(a)
 		phraseMatrix = np.matrix(phraseArray)
 
 		print(phraseMatrix)
