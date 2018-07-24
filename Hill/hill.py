@@ -2,6 +2,7 @@
 # Import libraries
 import numpy as np
 import numpy.linalg
+import math
 import itertools
 from itertools import islice
 from colorama import init
@@ -15,28 +16,64 @@ def encrypt():
 	appendedList = []
 	counter = 0
 	check = 0
+	key = []
 
 	# Get phrase
 	phrase = str(input("Enter phrase: ")).upper()
 	phrase =  list(phrase)
 	print(phrase)
 
+	# Ask to generate or input key
+	toggleKey = str(input("Enter key(1) or generate one randomly(2)?"))
+
 	# print(Back.YELLOW + Style.BRIGHT +"As of 7/16/2018 (M/D/Y), key dimension must be a factor or the phrase length. Will fix soon.")
-	keyDimension = int(input("Enter key dimension (Only one value as key is a square matrix): "))
+	keyDimension = int(input("Enter key length (Must be a perfect square.): "))
+	keyDimension = int(math.sqrt(keyDimension))
+	
+	if (toggleKey == "1"):
+		# User inputed key
+		keyValues = list(str(input("Enter keyword phrase.")).upper())
+		print(keyValues)
 
-	# Generate random key
-	while (check == 0):
-		randomMatrix = np.random.randint(low = 0, high = 25, size = (keyDimension,keyDimension))
-		key = np.matrix(randomMatrix)
-		print(Fore.GREEN + Style.BRIGHT + "Randomly generated key:")
+		while (counter < len(keyValues)):
+			n = alphabet.index(keyValues[counter])
+			key.append(n)
+			counter = counter + 1
+
+			if (len(key) == len(keyValues)):
+				counter = 0
+				n = 0
+				break
+
+		matrixBase = np.reshape(key, (keyDimension, keyDimension))
+		key = np.matrix(matrixBase)
+
+		print("Key: ")
 		print(key)
+	if (toggleKey == "2"):
+		# Generate random key
+		while (check == 0):
+			randomMatrix = np.random.randint(low = 0, high = 25, size = (keyDimension,keyDimension))
+			key = np.matrix(randomMatrix)
+			print(Fore.GREEN + Style.BRIGHT + "Randomly generated key:")
+			print(key)
 
-		# Check if determinant is nonzero 
-		# Range set at +/- 1 because sometimes determinant will be a very small number
-		# even though it should be 0.
-		if (np.linalg.det(key) > 1 or np.linalg.det(key) < -1):
-			check = 1
-			break
+			# Check if determinant is nonzero 
+			# Range set at +/- 1 because sometimes determinant will be a very small number even though it should be 0.
+			if (np.linalg.det(key) > 1 or np.linalg.det(key) < -1):
+				check = 1
+				break
+				
+		# Fix if invalid response entered
+
+	determinant = np.linalg.det(key).round()
+	print("Determinant:")
+	print(determinant)
+
+	if (determinant == 0):
+		print("Determinant = 0, CHANGE KEY")
+	elif ((determinant % len(alphabet)) == 0):
+		print("Determinant disivible by alphabet length, CHANGE THE KEY!")
 
 	while (counter < 26):
 		numericPhrase.append(int(alphabet.index(phrase[counter])))
@@ -59,7 +96,7 @@ def encrypt():
 	counter = 0
 
 	while (counter < segments):
-		print(Fore.GREEN + Style.BRIGHT + "------------------------------")
+		print(Fore.GREEN + Style.BRIGHT + "----------------------------------------")
 		a = list(numericPhrase[counter])
 		print(a)
 		counter = counter + 1
@@ -70,6 +107,8 @@ def encrypt():
 
 		# Convert phrase to matrix
 		phraseArray = np.reshape(a, (keyDimension, 1))
+		print("AAAAAA:")
+		print(a)
 		phraseMatrix = np.matrix(phraseArray)
 
 		print(phraseMatrix)
@@ -91,7 +130,7 @@ def encrypt():
 
 		appendedList.append(merged)
 
-	print(Fore.GREEN + Style.BRIGHT + "------------------------------")
+	print(Fore.GREEN + Style.BRIGHT + "----------------------------------------")
 
 	print(appendedList)
 	finalLetters = []
@@ -150,9 +189,3 @@ def toggle():
 		toggle()
 
 toggle()
-
-
-
-
-
-
