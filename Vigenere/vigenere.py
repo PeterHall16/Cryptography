@@ -44,11 +44,12 @@ key = list(key)
 
 while (counter < 26):
 	numericKey.append(alphabet.index(key[counter]))
-	print(numericKey)
 	counter = counter + 1
 	if (len(numericKey) == len(key)):
 		counter = 0
 		break
+		
+print("Numeric Key:" + numericKey)
 
 # Get phrase to encrypt
 phrase = list(str(input("enter phrase to encrypt/decrypt: ")).upper())
